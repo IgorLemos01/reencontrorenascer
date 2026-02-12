@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { ArrowLeft } from "lucide-react";
+import Doodles from "@/components/Doodles";
 
 const cadastroSchema = z.object({
   nome: z.string().trim().min(1, "Nome é obrigatório").max(100),
@@ -47,16 +48,24 @@ const Cadastro = () => {
   };
 
   const inputClasses =
-    "w-full bg-background border border-border rounded-lg px-4 py-3 font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all";
+    "w-full bg-background border-2 border-border rounded-xl px-4 py-3 font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all";
 
   return (
-    <main className="min-h-screen bg-muted/30 flex items-center justify-center px-4 py-12">
+    <main className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center px-4 py-12">
+      <Doodles className="text-primary/10" />
+      {/* Gradient blobs */}
+      <div className="absolute top-0 left-0 w-60 h-60 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-lg bg-card rounded-2xl shadow-card p-8 md:p-10"
+        className="relative z-10 w-full max-w-lg bg-card rounded-3xl shadow-card p-8 md:p-10 border border-border/50"
       >
+        {/* Green bar */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-accent to-secondary rounded-t-3xl" />
+
         <button
           onClick={() => navigate("/")}
           className="flex items-center gap-1 text-muted-foreground hover:text-foreground font-body text-sm mb-6 transition-colors"
@@ -64,24 +73,27 @@ const Cadastro = () => {
           <ArrowLeft className="w-4 h-4" /> Voltar
         </button>
 
-        <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-          Faça sua inscrição
-        </h1>
-        <p className="text-muted-foreground font-body mb-8">
-          Preencha os campos abaixo e garanta sua presença no{" "}
-          <span className="text-primary font-semibold">Reencontro do Renascer</span>.
-        </p>
+        <div className="text-center mb-8">
+          <span className="text-4xl mb-2 block">📝</span>
+          <h1 className="font-display text-3xl md:text-4xl font-extrabold text-foreground mb-2">
+            Faça sua inscrição
+          </h1>
+          <p className="text-muted-foreground font-body">
+            Garanta sua presença no{" "}
+            <span className="text-primary font-bold">Reencontro do Renascer</span>! 🎉
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {[
-            { name: "nome", label: "Nome", type: "text", placeholder: "Seu nome completo" },
-            { name: "idade", label: "Idade", type: "number", placeholder: "Sua idade" },
-            { name: "telefone", label: "Telefone", type: "tel", placeholder: "(99) 99999-9999" },
-            { name: "bairro", label: "Bairro", type: "text", placeholder: "Seu bairro" },
+            { name: "nome", label: "Nome", type: "text", placeholder: "Seu nome completo", emoji: "👤" },
+            { name: "idade", label: "Idade", type: "number", placeholder: "Sua idade", emoji: "🎂" },
+            { name: "telefone", label: "Telefone", type: "tel", placeholder: "(99) 99999-9999", emoji: "📱" },
+            { name: "bairro", label: "Bairro", type: "text", placeholder: "Seu bairro", emoji: "📍" },
           ].map((field) => (
             <div key={field.name}>
-              <label className="block font-body text-sm font-medium text-foreground mb-1.5">
-                {field.label} <span className="text-destructive">*</span>
+              <label className="block font-body text-sm font-semibold text-foreground mb-1.5">
+                {field.emoji} {field.label} <span className="text-destructive">*</span>
               </label>
               <input
                 name={field.name}
@@ -92,7 +104,7 @@ const Cadastro = () => {
                 className={inputClasses}
               />
               {errors[field.name] && (
-                <p className="text-destructive text-xs mt-1 font-body">
+                <p className="text-destructive text-xs mt-1 font-body font-semibold">
                   {errors[field.name]}
                 </p>
               )}
@@ -100,8 +112,8 @@ const Cadastro = () => {
           ))}
 
           <div>
-            <label className="block font-body text-sm font-medium text-foreground mb-1.5">
-              Como você chegou ao Renascer?
+            <label className="block font-body text-sm font-semibold text-foreground mb-1.5">
+              💬 Como você chegou ao Renascer?
             </label>
             <textarea
               name="comoChegou"
@@ -113,14 +125,12 @@ const Cadastro = () => {
             />
           </div>
 
-          <motion.button
+          <button
             type="submit"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-primary text-primary-foreground font-body font-semibold text-lg py-4 rounded-full shadow-soft hover:brightness-110 transition-all mt-2"
+            className="w-full bg-primary text-primary-foreground font-display font-bold text-lg py-4 rounded-full shadow-soft hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all mt-2"
           >
             Confirmar inscrição ✅
-          </motion.button>
+          </button>
         </form>
       </motion.div>
     </main>
