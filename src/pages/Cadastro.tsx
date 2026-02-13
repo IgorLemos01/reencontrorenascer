@@ -6,7 +6,8 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Doodles from "@/components/Doodles";
 
-const ZAPIER_WEBHOOK_URL = "";
+// ✅ URL DO SEU GOOGLE APPS SCRIPT CONFIGURADA
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYK9f6hRrnkE7VYqo09uklMh8yZbi5Tl3aFczLPRxch8jdztknZUeJnO-Nglep5CtP/exec";
 
 const cadastroSchema = z.object({
   nome: z.string().trim().min(1, "Nome é obrigatório").max(100),
@@ -50,30 +51,36 @@ const Cadastro = () => {
       return;
     }
 
-    if (!ZAPIER_WEBHOOK_URL) {
-      // No webhook configured, just navigate
-      navigate("/confirmacao");
-      return;
-    }
-
     setIsLoading(true);
+    
     try {
-      await fetch(ZAPIER_WEBHOOK_URL, {
+      // Envio para o Google Sheets usando no-cors
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "no-cors",
+        mode: "no-cors", 
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           ...result.data,
           timestamp: new Date().toISOString(),
         }),
       });
+
+      // Sucesso
+      toast({
+        title: "Sucesso!",
+        description: "Inscrição realizada com sucesso.",
+        variant: "default",
+      });
+      
       navigate("/confirmacao");
+      
     } catch (error) {
-      console.error("Error sending to webhook:", error);
+      console.error("Erro ao enviar:", error);
       toast({
         title: "Erro ao enviar",
-        description:
-          "Não foi possível registrar sua inscrição. Tente novamente.",
+        description: "Não foi possível registrar sua inscrição. Tente novamente.",
         variant: "destructive",
       });
     } finally {
