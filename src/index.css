@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -45,8 +45,8 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-display: 'Baloo 2', cursive;
-    --font-body: 'Nunito', sans-serif;
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Sora', sans-serif;
 
     --gradient-hero: linear-gradient(135deg, hsl(96 37% 42% / 0.85), hsl(88 42% 52% / 0.7));
     --gradient-golden: linear-gradient(135deg, hsl(54 73% 59%), hsl(45 80% 55%));

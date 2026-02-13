@@ -2,8 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import Doodles from "@/components/Doodles";
+
+const ZAPIER_WEBHOOK_URL = "";
 
 const cadastroSchema = z.object({
   nome: z.string().trim().min(1, "Nome é obrigatório").max(100),
@@ -17,6 +20,8 @@ type FormData = z.infer<typeof cadastroSchema>;
 
 const Cadastro = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState<FormData>({
     nome: "",
     idade: "",
@@ -33,7 +38,7 @@ const Cadastro = () => {
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = cadastroSchema.safeParse(form);
     if (!result.success) {
@@ -44,7 +49,36 @@ const Cadastro = () => {
       setErrors(fieldErrors);
       return;
     }
-    navigate("/confirmacao");
+
+    if (!ZAPIER_WEBHOOK_URL) {
+      // No webhook configured, just navigate
+      navigate("/confirmacao");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await fetch(ZAPIER_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: JSON.stringify({
+          ...result.data,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      navigate("/confirmacao");
+    } catch (error) {
+      console.error("Error sending to webhook:", error);
+      toast({
+        title: "Erro ao enviar",
+        description:
+          "Não foi possível registrar sua inscrição. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputClasses =
@@ -53,7 +87,6 @@ const Cadastro = () => {
   return (
     <main className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center px-4 py-12">
       <Doodles className="text-primary/10" />
-      {/* Gradient blobs */}
       <div className="absolute top-0 left-0 w-60 h-60 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
 
@@ -63,7 +96,6 @@ const Cadastro = () => {
         transition={{ duration: 0.6 }}
         className="relative z-10 w-full max-w-lg bg-card rounded-3xl shadow-card p-8 md:p-10 border border-border/50"
       >
-        {/* Green bar */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-accent to-secondary rounded-t-3xl" />
 
         <button
@@ -80,20 +112,48 @@ const Cadastro = () => {
           </h1>
           <p className="text-muted-foreground font-body">
             Garanta sua presença no{" "}
-            <span className="text-primary font-bold">Reencontro do Renascer</span>! 🎉
+            <span className="text-primary font-bold">
+              Reencontro do Renascer
+            </span>
+            ! 🎉
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {[
-            { name: "nome", label: "Nome", type: "text", placeholder: "Seu nome completo", emoji: "👤" },
-            { name: "idade", label: "Idade", type: "number", placeholder: "Sua idade", emoji: "🎂" },
-            { name: "telefone", label: "Telefone", type: "tel", placeholder: "(99) 99999-9999", emoji: "📱" },
-            { name: "bairro", label: "Bairro", type: "text", placeholder: "Seu bairro", emoji: "📍" },
+            {
+              name: "nome",
+              label: "Nome",
+              type: "text",
+              placeholder: "Seu nome completo",
+              emoji: "👤",
+            },
+            {
+              name: "idade",
+              label: "Idade",
+              type: "number",
+              placeholder: "Sua idade",
+              emoji: "🎂",
+            },
+            {
+              name: "telefone",
+              label: "Telefone",
+              type: "tel",
+              placeholder: "(99) 99999-9999",
+              emoji: "📱",
+            },
+            {
+              name: "bairro",
+              label: "Bairro",
+              type: "text",
+              placeholder: "Seu bairro",
+              emoji: "📍",
+            },
           ].map((field) => (
             <div key={field.name}>
               <label className="block font-body text-sm font-semibold text-foreground mb-1.5">
-                {field.emoji} {field.label} <span className="text-destructive">*</span>
+                {field.emoji} {field.label}{" "}
+                <span className="text-destructive">*</span>
               </label>
               <input
                 name={field.name}
@@ -127,9 +187,17 @@ const Cadastro = () => {
 
           <button
             type="submit"
-            className="w-full bg-primary text-primary-foreground font-display font-bold text-lg py-4 rounded-full shadow-soft hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all mt-2"
+            disabled={isLoading}
+            className="w-full bg-primary text-primary-foreground font-display font-bold text-lg py-4 rounded-full shadow-soft hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all mt-2 disabled:opacity-70 disabled:pointer-events-none flex items-center justify-center gap-2"
           >
-            Confirmar inscrição ✅
+            {isLoading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Enviando...
+              </>
+            ) : (
+              "Confirmar inscrição ✅"
+            )}
           </button>
         </form>
       </motion.div>
