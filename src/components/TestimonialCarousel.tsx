@@ -9,19 +9,19 @@ import testimonial3 from "@/assets/testimonial-3.jpg";
 
 const testimonials = [
   {
-    name: "Ana Clara",
+    name: "Vinícius Pereira",
     photo: testimonial1,
     text: "Foi uma das experiências mais marcantes da minha vida. Senti o amor de Deus de uma forma que nunca tinha sentido antes. Saí de lá transformada! 💛",
     highlight: "Experiência transformadora",
   },
   {
-    name: "Lucas Mendes",
+    name: "Eloiza Amaral",
     photo: testimonial2,
     text: "Eu estava afastado da fé, mas o Reencontro me trouxe de volta. Chorei, sorri e entendi que Deus nunca desistiu de mim. 🙏",
     highlight: "Um recomeço de fé",
   },
   {
-    name: "Beatriz Santos",
+    name: "Gladson do Nascimento",
     photo: testimonial3,
     text: "Cada momento foi especial. A música, as palavras, o acolhimento... Tudo me fez sentir que eu estava no lugar certo, na hora certa. ✨",
     highlight: "Acolhimento genuíno",
