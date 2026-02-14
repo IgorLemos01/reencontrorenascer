@@ -145,61 +145,61 @@ const TestimonialCarousel = () => {
                 whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.7, type: "spring" }}
-                className="min-w-[88vw] sm:min-w-[420px] md:min-w-[500px] snap-center flex-shrink-0"
+                className="w-[82vw] max-w-[82vw] sm:w-[380px] sm:max-w-[380px] md:w-[460px] md:max-w-[460px] snap-center flex-shrink-0"
               >
-                <div className="bg-card rounded-[2rem] shadow-card border border-border/40 overflow-hidden relative group hover:shadow-soft hover:-translate-y-2 transition-all duration-500">
+                <div className="bg-card rounded-[2rem] shadow-card border border-border/40 overflow-visible relative group hover:shadow-soft hover:-translate-y-2 transition-all duration-500">
                   {/* Gradient top bar */}
                   <div className="h-2.5 bg-gradient-to-r from-primary via-secondary to-accent" />
 
                   {/* Floating quote */}
                   <motion.div
                     whileHover={{ rotate: 12, scale: 1.1 }}
-                    className="absolute top-8 right-8 bg-primary rounded-2xl p-3.5 rotate-3 shadow-soft"
+                    className="absolute top-5 right-5 sm:top-8 sm:right-8 bg-primary rounded-2xl p-2.5 sm:p-3.5 rotate-3 shadow-soft z-10"
                   >
-                    <Quote className="w-6 h-6 text-primary-foreground" />
+                    <Quote className="w-4 h-4 sm:w-6 sm:h-6 text-primary-foreground" />
                   </motion.div>
 
-                  <div className="p-10 md:p-12">
+                  <div className="p-5 sm:p-8 md:p-10">
                     {/* Photo */}
-                    <div className="flex justify-center mb-10">
+                    <div className="flex justify-center mb-5 sm:mb-8">
                       <div className="relative">
                         <img
                           src={t.photo}
                           alt={`Testemunho de ${t.name}`}
-                          className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-primary/20 shadow-soft"
+                          className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary/20 shadow-soft"
                         />
                         <div className="absolute inset-0 rounded-full border-2 border-dashed border-secondary/40 -m-3 animate-[spin_25s_linear_infinite]" />
                         {/* Highlight badge */}
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-secondary text-secondary-foreground font-display font-bold text-xs px-4 py-1.5 rounded-full shadow-cta whitespace-nowrap">
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-secondary text-secondary-foreground font-display font-bold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-cta whitespace-nowrap">
                           {t.highlight}
                         </div>
                       </div>
                     </div>
 
                     {/* Stars */}
-                    <div className="flex justify-center gap-1 mb-6">
+                    <div className="flex justify-center gap-1 mb-3 sm:mb-5">
                       {[...Array(5)].map((_, si) => (
                         <Star
                           key={si}
-                          className="w-5 h-5 fill-secondary text-secondary"
+                          className="w-4 h-4 sm:w-5 sm:h-5 fill-secondary text-secondary"
                         />
                       ))}
                     </div>
 
                     {/* Text */}
-                    <p className="text-foreground font-body text-lg md:text-xl leading-relaxed mb-10 text-center italic">
+                    <p className="text-foreground font-body text-sm sm:text-base md:text-lg leading-relaxed mb-5 sm:mb-8 text-center italic break-words">
                       "{t.text}"
                     </p>
 
                     {/* Name */}
                     <div className="text-center">
-                      <p className="font-display font-extrabold text-2xl md:text-3xl text-accent">
+                      <p className="font-display font-extrabold text-lg sm:text-2xl md:text-3xl text-accent">
                         {t.name}
                       </p>
-                      <div className="flex items-center justify-center gap-2 mt-4">
-                        <div className="w-3 h-3 bg-secondary rounded-full" />
-                        <div className="w-10 h-1.5 bg-primary rounded-full" />
-                        <div className="w-3 h-3 bg-secondary rounded-full" />
+                      <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-secondary rounded-full" />
+                        <div className="w-8 sm:w-10 h-1.5 bg-primary rounded-full" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-secondary rounded-full" />
                       </div>
                     </div>
                   </div>
@@ -213,7 +213,7 @@ const TestimonialCarousel = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.7 }}
-              className="min-w-[88vw] sm:min-w-[420px] md:min-w-[500px] snap-center flex-shrink-0"
+              className="w-[82vw] max-w-[82vw] sm:w-[380px] sm:max-w-[380px] md:w-[460px] md:max-w-[460px] snap-center flex-shrink-0"
             >
               <div className="relative bg-gradient-to-br from-primary via-accent to-primary rounded-[2rem] shadow-card overflow-hidden h-full">
                 <Doodles className="text-primary-foreground" />
