@@ -7,7 +7,7 @@ const Confirmacao = () => {
   const navigate = useNavigate();
 
   // TODO: substituir pelo link real do grupo
-  const whatsappLink = "https://chat.whatsapp.com/SEU-LINK-AQUI";
+  const whatsappLink = "https://chat.whatsapp.com/GKhoODkpEevDSzrxfryNgw?mode=gi_t";
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center px-4 py-12">
