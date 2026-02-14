@@ -23,7 +23,7 @@ const testimonials = [
   {
     name: "Gladson do Nascimento",
     photo: testimonial3,
-    text: "No ano de 99 ou minha mãe participou do Renascer e eu do Renacezinho, onde uma semente foi lançada, 10 anos depois minha mãe me levou para o Acamps onde aquela semente brotou",
+    text: "No ano de 99 ou minha mãe participou do Renascer e eu do Renascerzinho, onde uma semente foi lançada, 10 anos depois minha mãe me levou para o Acamps onde aquela semente brotou",
     highlight: "Acolhimento genuíno",
   },
 ];
