@@ -39,7 +39,7 @@ const HeroSection = () => {
           </h1>
           <div className="inline-block bg-primary-foreground px-8 py-2 mt-3 rounded-xl -rotate-1">
             <span className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold text-accent tracking-tight">
-              renascer
+              RENASCER
             </span>
           </div>
         </motion.div>
