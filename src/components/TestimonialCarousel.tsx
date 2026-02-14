@@ -11,19 +11,19 @@ const testimonials = [
   {
     name: "Vinícius Pereira",
     photo: testimonial1,
-    text: "Foi uma das experiências mais marcantes da minha vida. Senti o amor de Deus de uma forma que nunca tinha sentido antes. Saí de lá transformada! 💛",
+    text: "No renascer de 2007 eu descobri que Deus era meu Pai e me amava com um Amor que supera tudo. No grupo de oração eu fui aprofundando esse amor e cultivando a cada encontro a certeza de que ele é para sempre!",
     highlight: "Experiência transformadora",
   },
   {
     name: "Eloiza Amaral",
     photo: testimonial2,
-    text: "Eu estava afastado da fé, mas o Reencontro me trouxe de volta. Chorei, sorri e entendi que Deus nunca desistiu de mim. 🙏",
+    text: "Eu fui alcançada pelo Renascer em 2017 e valeu apena permanecer. Hoje sou Consagrada a Deus na Comunidade de Vida Shalom.",
     highlight: "Um recomeço de fé",
   },
   {
     name: "Gladson do Nascimento",
     photo: testimonial3,
-    text: "Cada momento foi especial. A música, as palavras, o acolhimento... Tudo me fez sentir que eu estava no lugar certo, na hora certa. ✨",
+    text: "No ano de 99 ou minha mãe participou do Renascer e eu do Renacezinho, onde uma semente foi lançada, 10 anos depois minha mãe me levou para o Acamps onde aquela semente brotou",
     highlight: "Acolhimento genuíno",
   },
 ];
