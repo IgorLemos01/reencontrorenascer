@@ -11,7 +11,7 @@ const testimonials = [
   {
     name: "Vinícius Pereira",
     photo: testimonial1,
-    text: "No renascer de 2007 eu descobri que Deus era meu Pai e me amava com um Amor que supera tudo. No grupo de oração eu fui aprofundando esse amor e cultivando a cada encontro a certeza de que ele é para sempre!",
+    text: "No renascer de 2007 eu descobri que Deus",
     highlight: "Experiência transformadora",
   },
   {
