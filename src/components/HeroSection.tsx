@@ -24,8 +24,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="text-primary-foreground/90 font-body text-base md:text-lg max-w-xl mx-auto mb-6 leading-relaxed"
         >
-          O que o Vinícius fez no carnaval passado não sabemos, mas o que você
-          vai fazer próximo sábado já está marcado:
+          O que você vai fazer próximo
+            sábado já está marcado:
         </motion.p>
 
         <motion.div
